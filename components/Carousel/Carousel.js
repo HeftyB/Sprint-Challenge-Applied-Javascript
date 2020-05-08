@@ -52,22 +52,27 @@ function MakeCarousel () {
   let currentPhoto = 0;
 
   leftButton.addEventListener("click", event => {
-    photoArray[currentPhoto].style.display = "none";
+    gsap.to(".notHidden", { display: "none" });
+    photoArray[currentPhoto].classList.toggle("notHidden");
     currentPhoto = currentPhoto - 1;
     if ( currentPhoto < 0 ) {
       currentPhoto = 3;
     }
-    photoArray[currentPhoto].style.display = "block";
+    photoArray[currentPhoto].classList.toggle("notHidden")
+    gsap.to(".notHidden", { display: "block" });
   });
   rightButton.addEventListener("click", event => {
-    photoArray[currentPhoto].style.display = "none";
+    gsap.to(".notHidden", { display: "none" });
+    photoArray[currentPhoto].classList.toggle("notHidden");
     currentPhoto++;
     if ( currentPhoto > 3 ) {
       currentPhoto = 0;
     }
-    photoArray[currentPhoto].style.display = "block";
+    photoArray[currentPhoto].classList.toggle("notHidden");
+    gsap.to(".notHidden", 0.3, {opacity:1,display:'block'});
   });
   img1.style.display = "block";
+  img1.classList.add("notHidden");
   console.log(photoArray[currentPhoto]);
 }
 MakeCarousel();
