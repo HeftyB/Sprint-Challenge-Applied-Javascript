@@ -17,3 +17,62 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+let carouselContainer = document.querySelector(".carousel-container");
+
+function MakeCarousel () {
+
+  let carousel = document.createElement("div");
+  let leftButton = document.createElement("div");
+  let img1 = document.createElement("img");
+  let img2 = document.createElement("img");
+  let img3 = document.createElement("img");
+  let img4 = document.createElement("img");
+  let rightButton = document.createElement("div");
+
+  carousel.classList.add("carousel");
+  leftButton.classList.add("left-button");
+  rightButton.classList.add("right-button");
+
+  img1.setAttribute("src", "./assets/carousel/mountains.jpeg");
+  img2.setAttribute("src", "./assets/carousel/computer.jpeg");
+  img3.setAttribute("src", "./assets/carousel/trees.jpeg");
+  img4.setAttribute("src", "./assets/carousel/turntable.jpeg");
+
+  carousel.appendChild(leftButton);
+  carousel.appendChild(img1);
+  carousel.appendChild(img2);
+  carousel.appendChild(img3);
+  carousel.appendChild(img4);
+  carousel.appendChild(rightButton);
+
+  carouselContainer.appendChild(carousel);
+  let photoArray = [img1, img2, img3, img4];
+
+  let currentPhoto = 0;
+
+  leftButton.addEventListener("click", event => {
+    gsap.to(".notHidden", { display: "none" });
+    photoArray[currentPhoto].classList.toggle("notHidden");
+    currentPhoto = currentPhoto - 1;
+    if ( currentPhoto < 0 ) {
+      currentPhoto = 3;
+    }
+    photoArray[currentPhoto].classList.toggle("notHidden")
+    gsap.to(".notHidden", { display: "block" });
+  });
+  rightButton.addEventListener("click", event => {
+    gsap.to(".notHidden", { display: "none" });
+    photoArray[currentPhoto].classList.toggle("notHidden");
+    currentPhoto++;
+    if ( currentPhoto > 3 ) {
+      currentPhoto = 0;
+    }
+    photoArray[currentPhoto].classList.toggle("notHidden");
+    gsap.to(".notHidden", 0.3, {opacity:1,display:'block'});
+  });
+  img1.style.display = "block";
+  img1.classList.add("notHidden");
+  console.log(photoArray[currentPhoto]);
+}
+MakeCarousel();
